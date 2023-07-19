@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @EqualsAndHashCode(of = "id")
 public class Testimony {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +29,28 @@ public class Testimony {
     private String userTestimony;
 
     @Column(name = "user_name")
-    private String userName;
-    
+    private String userName;    
     private Boolean active;
+
+    
+    public Testimony(TestimonyFormDTO testimonyFormDto) {
+        this.userPicture = testimonyFormDto.userPicture();
+        this.userTestimony = testimonyFormDto.userTestimony();
+        this.userName = testimonyFormDto.userName();
+        this.active = true;
+    }
+
+
+    public void update(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
+        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
+            this.userPicture = testimonyUpdateFormDTO.userPicture();
+        }
+        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
+            this.userTestimony = testimonyUpdateFormDTO.userTestimony();
+        }
+        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
+            this.userName = testimonyUpdateFormDTO.userName();
+        }
+    }
 
 }
