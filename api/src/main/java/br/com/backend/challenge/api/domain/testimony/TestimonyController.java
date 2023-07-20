@@ -4,12 +4,12 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/depoimentos")
 public class TestimonyController {
 
     private final TestimonyService testimonyService;
@@ -26,26 +25,37 @@ public class TestimonyController {
         this.testimonyService = testimonyService;
     }
 
-    @PostMapping
+    @PostMapping("depoimentos")
     public ResponseEntity<TestimonyDTO> createTestimony(@RequestBody @Valid TestimonyFormDTO testimonyFormDto, UriComponentsBuilder uriBuilder) {
         TestimonyDTO testimonyDTO = testimonyService.postTestimony(testimonyFormDto);
         URI uri = uriBuilder.path("depoimentos/{id}").buildAndExpand(testimonyDTO.id()).toUri();
         return ResponseEntity.created(uri).body(testimonyDTO);
     }
 
-    @GetMapping
+    @GetMapping("depoimentos")
     public ResponseEntity<List<TestimonyDTO>> getTestimonys() {
         return ResponseEntity.ok(testimonyService.readAllTestimonys());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("depoimentos/{id}")
     public ResponseEntity<TestimonyDTO> getTestimonyById(@PathVariable Long id) {
         return ResponseEntity.ok(testimonyService.readTestimonyById(id));
     }
 
-    @PutMapping
+    @GetMapping("depoimentos-home")
+    public ResponseEntity<List<TestimonyDTO>> getRandomTestimonys() {
+        return ResponseEntity.ok(testimonyService.readRandomTestimonys());
+    }
+
+    @PutMapping("depoimentos")
     public ResponseEntity<TestimonyDTO> putTestimonyById(@RequestBody @Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
         return ResponseEntity.ok(testimonyService.updateTestimony(testimonyUpdateFormDTO));
+    }
+
+    @DeleteMapping("depoimentos/{id}")
+    public ResponseEntity<TestimonyDTO> deleteTestimonyById(@PathVariable Long id) {
+        testimonyService.removeTestimonyById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

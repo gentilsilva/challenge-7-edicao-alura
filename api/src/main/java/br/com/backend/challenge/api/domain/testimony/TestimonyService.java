@@ -32,11 +32,22 @@ public class TestimonyService {
         return new TestimonyDTO(testimonyRepository.getReferenceByIdAndActiveTrue(id));
     }
 
+    @Transactional(readOnly = true)
+    public List<TestimonyDTO> readRandomTestimonys() {
+        return testimonyRepository.listRandomTestimonysAndActiveTrue().stream().map(TestimonyDTO::new).toList();
+    }
+
     @Transactional
     public TestimonyDTO updateTestimony(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
         Testimony testimony = testimonyRepository.getReferenceByIdAndActiveTrue(testimonyUpdateFormDTO.id());
         testimony.update(testimonyUpdateFormDTO);
         return new TestimonyDTO(testimony);
+    }
+
+    @Transactional
+    public void removeTestimonyById(Long id) {
+        Testimony testimony = testimonyRepository.getReferenceByIdAndActiveTrue(id);
+        testimony.inactivate();
     }
 
 }

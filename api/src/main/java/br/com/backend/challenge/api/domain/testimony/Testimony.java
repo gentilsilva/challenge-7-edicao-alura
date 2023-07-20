@@ -31,7 +31,6 @@ public class Testimony {
     @Column(name = "user_name")
     private String userName;    
     private Boolean active;
-
     
     public Testimony(TestimonyFormDTO testimonyFormDto) {
         this.userPicture = testimonyFormDto.userPicture();
@@ -39,7 +38,6 @@ public class Testimony {
         this.userName = testimonyFormDto.userName();
         this.active = true;
     }
-
 
     public void update(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
         if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
@@ -51,6 +49,10 @@ public class Testimony {
         if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
             this.userName = testimonyUpdateFormDTO.userName();
         }
+    }
+
+    public void inactivate() {
+        this.active = false;
     }
 
 }
