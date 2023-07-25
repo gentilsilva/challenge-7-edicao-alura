@@ -17,6 +17,8 @@ public class Testimony {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String picture;
+
+    @Column(columnDefinition = "TEXT")
     private String testimony;
     private String name;
 

@@ -1,6 +1,6 @@
 CREATE TABLE tb_destination(
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    picture VARCHAR(100) NOT NULL,
+    picture VARCHAR(255) NOT NULL,
     name VARCHAR(100) NOT NULL,
     price DECIMAL(10, 2),
     is_active TINYINT DEFAULT 1

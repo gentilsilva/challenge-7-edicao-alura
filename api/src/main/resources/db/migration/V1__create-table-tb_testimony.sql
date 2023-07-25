@@ -1,6 +1,6 @@
 CREATE TABLE tb_testimony (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    picture VARCHAR(100) NOT NULL,
+    picture VARCHAR(255) NOT NULL,
     testimony TEXT NOT NULL,
     name VARCHAR(100) NOT NULL,
     is_active TINYINT DEFAULT 1
