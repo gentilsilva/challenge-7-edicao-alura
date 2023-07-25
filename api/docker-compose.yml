@@ -1,0 +1,22 @@
+services:
+  db:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'milhas'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - '/F:\data\mysql'
+    ports:
+      - '3406:3306'
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:

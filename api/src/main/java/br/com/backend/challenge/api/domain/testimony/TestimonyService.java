@@ -24,12 +24,12 @@ public class TestimonyService {
 
     @Transactional(readOnly = true)
     public List<TestimonyDTO> readAllTestimonys() {
-        return testimonyRepository.findAllByActiveTrue().stream().map(TestimonyDTO::new).toList();
+        return testimonyRepository.findAllByIsActiveTrue().stream().map(TestimonyDTO::new).toList();
     }
 
     @Transactional(readOnly = true)
     public TestimonyDTO readTestimonyById(Long id) {
-        return new TestimonyDTO(testimonyRepository.getReferenceByIdAndActiveTrue(id));
+        return new TestimonyDTO(testimonyRepository.getReferenceByIdAndIsActiveTrue(id));
     }
 
     @Transactional(readOnly = true)
@@ -39,14 +39,14 @@ public class TestimonyService {
 
     @Transactional
     public TestimonyDTO updateTestimony(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
-        Testimony testimony = testimonyRepository.getReferenceByIdAndActiveTrue(testimonyUpdateFormDTO.id());
+        Testimony testimony = testimonyRepository.getReferenceByIdAndIsActiveTrue(testimonyUpdateFormDTO.id());
         testimony.update(testimonyUpdateFormDTO);
         return new TestimonyDTO(testimony);
     }
 
     @Transactional
     public void removeTestimonyById(Long id) {
-        Testimony testimony = testimonyRepository.getReferenceByIdAndActiveTrue(id);
+        Testimony testimony = testimonyRepository.getReferenceByIdAndIsActiveTrue(id);
         testimony.inactivate();
     }
 

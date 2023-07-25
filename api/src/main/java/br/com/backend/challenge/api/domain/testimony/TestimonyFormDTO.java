@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 public record TestimonyFormDTO(
 
     @NotNull
-    String userPicture,
+    String picture,
 
     @NotNull
-    String userTestimony,
+    String testimony,
     
     @NotNull
-    String userName
+    String name
     
 ) {
     

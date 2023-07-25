@@ -1,11 +1,6 @@
 package br.com.backend.challenge.api.domain.testimony;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,38 +16,34 @@ public class Testimony {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String picture;
+    private String testimony;
+    private String name;
 
-    @Column(name = "user_picture")
-    private String userPicture;
-
-    @Column(name = "user_testimony")
-    private String userTestimony;
-
-    @Column(name = "user_name")
-    private String userName;    
-    private Boolean active;
+    @Column(name = "is_active")
+    private Boolean isActive;
     
     public Testimony(TestimonyFormDTO testimonyFormDto) {
-        this.userPicture = testimonyFormDto.userPicture();
-        this.userTestimony = testimonyFormDto.userTestimony();
-        this.userName = testimonyFormDto.userName();
-        this.active = true;
+        this.picture = testimonyFormDto.picture();
+        this.testimony = testimonyFormDto.testimony();
+        this.name = testimonyFormDto.name();
+        this.isActive = true;
     }
 
     public void update(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
-        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
-            this.userPicture = testimonyUpdateFormDTO.userPicture();
+        if (!testimonyUpdateFormDTO.picture().equals(" ")) {
+            this.picture = testimonyUpdateFormDTO.picture();
         }
-        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
-            this.userTestimony = testimonyUpdateFormDTO.userTestimony();
+        if (!testimonyUpdateFormDTO.testimony().equals(" ")) {
+            this.testimony = testimonyUpdateFormDTO.testimony();
         }
-        if (!testimonyUpdateFormDTO.userPicture().equals(" ")) {
-            this.userName = testimonyUpdateFormDTO.userName();
+        if (!testimonyUpdateFormDTO.name().equals(" ")) {
+            this.name = testimonyUpdateFormDTO.name();
         }
     }
 
     public void inactivate() {
-        this.active = false;
+        this.isActive = false;
     }
 
 }

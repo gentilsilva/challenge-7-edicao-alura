@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface TestimonyRepository extends JpaRepository<Testimony, Long> {
 
-    List<Testimony> findAllByActiveTrue();
+    List<Testimony> findAllByIsActiveTrue();
 
-    Testimony getReferenceByIdAndActiveTrue(Long id);
+    Testimony getReferenceByIdAndIsActiveTrue(Long id);
 
-    @Query(value = "SELECT * FROM tb_testimony WHERE tb_testimony.active = TRUE ORDER BY RAND() LIMIT 3", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_testimony WHERE tb_testimony.is_active = TRUE ORDER BY RAND() LIMIT 3", nativeQuery = true)
     List<Testimony> listRandomTestimonysAndActiveTrue();
     
 }

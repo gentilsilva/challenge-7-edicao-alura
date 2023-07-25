@@ -7,6 +7,6 @@ public record TestimonyDTO(
     String userName
 ) {
     public TestimonyDTO(Testimony testimony) {
-        this(testimony.getId(), testimony.getUserPicture(), testimony.getUserTestimony(), testimony.getUserName());
+        this(testimony.getId(), testimony.getPicture(), testimony.getTestimony(), testimony.getName());
     }
 }
