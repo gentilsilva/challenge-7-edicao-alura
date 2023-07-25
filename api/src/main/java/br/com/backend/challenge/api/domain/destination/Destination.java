@@ -21,4 +21,7 @@ public class Destination {
     private String name;
     private BigDecimal price;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
 }
