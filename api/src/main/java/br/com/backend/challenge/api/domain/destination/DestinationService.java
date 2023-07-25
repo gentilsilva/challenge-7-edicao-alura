@@ -15,7 +15,7 @@ public class DestinationService {
     }
 
     @Transactional(readOnly = true)
-    public List<DestinationDTO> readAllByIsActiveTrue() {
+    public List<DestinationDTO> readAllDestinations() {
         return destinationRepository.findAllByIsActiveTrue().stream().map(DestinationDTO::new).toList();
     }
 
@@ -24,5 +24,30 @@ public class DestinationService {
         Destination destination = new Destination(destinationFormDTO);
         destinationRepository.save(destination);
         return new DestinationDTO(destination);
+    }
+
+    @Transactional(readOnly = true)
+    public DestinationDTO readDestinationById(Long id) {
+        return new DestinationDTO(destinationRepository.getReferenceByIdAndIsActiveTrue(id));
+    }
+
+    @Transactional
+    public DestinationDTO updateDestination(DestinationUpdateFormDTO destinationUpdateFormDTO) {
+        Destination destination = destinationRepository.getReferenceByIdAndIsActiveTrue(destinationUpdateFormDTO.id());
+        if (destination == null) {
+            return null;
+        }
+        destination.update(destinationUpdateFormDTO);
+        return new DestinationDTO(destination);
+    }
+
+    @Transactional
+    public Boolean removeDestination(Long id) {
+        Destination destination = destinationRepository.getReferenceByIdAndIsActiveTrue(id);
+        if (destination == null) {
+            return false;
+        }
+        destination.inactive();
+        return true;
     }
 }

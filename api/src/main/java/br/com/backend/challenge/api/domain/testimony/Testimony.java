@@ -34,15 +34,15 @@ public class Testimony {
         this.isActive = true;
     }
 
-    public void update(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
-        if (!testimonyUpdateFormDTO.picture().equals(" ")) {
-            this.picture = testimonyUpdateFormDTO.picture();
+    public void update(@Valid TestimonyUpdateFormDTO testimonyDTO) {
+        if (!testimonyDTO.picture().equals(" ")) {
+            this.picture = testimonyDTO.picture();
         }
-        if (!testimonyUpdateFormDTO.testimony().equals(" ")) {
-            this.testimony = testimonyUpdateFormDTO.testimony();
+        if (!testimonyDTO.testimony().equals(" ")) {
+            this.testimony = testimonyDTO.testimony();
         }
-        if (!testimonyUpdateFormDTO.name().equals(" ")) {
-            this.name = testimonyUpdateFormDTO.name();
+        if (!testimonyDTO.name().equals(" ")) {
+            this.name = testimonyDTO.name();
         }
     }
 

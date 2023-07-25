@@ -32,4 +32,20 @@ public class Destination {
         this.price = destinationFormDTO.price();
         this.isActive = true;
     }
+
+    public void update(DestinationUpdateFormDTO destinationUpdateFormDTO) {
+        if (!destinationUpdateFormDTO.picture().equals(" ")) {
+            this.picture = destinationUpdateFormDTO.picture();
+        }
+        if (!destinationUpdateFormDTO.name().equals(" ")) {
+            this.name = destinationUpdateFormDTO.name();
+        }
+        if (destinationUpdateFormDTO.price() != null) {
+            this.price = destinationUpdateFormDTO.price();
+        }
+    }
+
+    public void inactive() {
+        this.isActive = false;
+    }
 }

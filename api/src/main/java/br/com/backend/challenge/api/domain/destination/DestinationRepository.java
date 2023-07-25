@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DestinationRepository extends JpaRepository<Destination, Long> {
     List<Destination> findAllByIsActiveTrue();
+
+    Destination getReferenceByIdAndIsActiveTrue(Long id);
 }

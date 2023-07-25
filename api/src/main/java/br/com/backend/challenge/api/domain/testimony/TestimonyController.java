@@ -49,12 +49,19 @@ public class TestimonyController {
 
     @PutMapping("depoimentos")
     public ResponseEntity<TestimonyDTO> putTestimonyById(@RequestBody @Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
+        TestimonyDTO testimonyDTO = testimonyService.updateTestimony(testimonyUpdateFormDTO);
+        if (testimonyDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(testimonyService.updateTestimony(testimonyUpdateFormDTO));
     }
 
     @DeleteMapping("depoimentos/{id}")
     public ResponseEntity<TestimonyDTO> deleteTestimonyById(@PathVariable Long id) {
-        testimonyService.removeTestimonyById(id);
+        Boolean deleted = testimonyService.removeTestimonyById(id);
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().build();
     }
 

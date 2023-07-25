@@ -40,14 +40,21 @@ public class TestimonyService {
     @Transactional
     public TestimonyDTO updateTestimony(@Valid TestimonyUpdateFormDTO testimonyUpdateFormDTO) {
         Testimony testimony = testimonyRepository.getReferenceByIdAndIsActiveTrue(testimonyUpdateFormDTO.id());
+        if (testimony == null) {
+            return null;
+        }
         testimony.update(testimonyUpdateFormDTO);
         return new TestimonyDTO(testimony);
     }
 
     @Transactional
-    public void removeTestimonyById(Long id) {
+    public Boolean removeTestimonyById(Long id) {
         Testimony testimony = testimonyRepository.getReferenceByIdAndIsActiveTrue(id);
+        if (testimony == null) {
+            return false;
+        }
         testimony.inactivate();
+        return true;
     }
 
 }

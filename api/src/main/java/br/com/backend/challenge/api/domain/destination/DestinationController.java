@@ -27,7 +27,30 @@ public class DestinationController {
 
     @GetMapping
     public ResponseEntity<List<DestinationDTO>> getDestinations() {
-        return ResponseEntity.ok(destinationService.readAllByIsActiveTrue());
+        return ResponseEntity.ok(destinationService.readAllDestinations());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<DestinationDTO> getDestinationById(@PathVariable Long id) {
+        return ResponseEntity.ok(destinationService.readDestinationById(id));
+    }
+
+    @PutMapping
+    public ResponseEntity<DestinationDTO> putDestinationById(@RequestBody DestinationUpdateFormDTO destinationUpdateFormDTO) {
+        DestinationDTO destinationDTO = destinationService.updateDestination(destinationUpdateFormDTO);
+        if (destinationDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(destinationDTO);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<DestinationDTO> deleteDestination(@PathVariable Long id) {
+        Boolean deleted = destinationService.removeDestination(id);
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }
