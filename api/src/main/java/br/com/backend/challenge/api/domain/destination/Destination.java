@@ -17,6 +17,8 @@ public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 2048)
     private String picture;
     private String name;
     private BigDecimal price;
@@ -24,4 +26,10 @@ public class Destination {
     @Column(name = "is_active")
     private Boolean isActive;
 
+    public Destination(DestinationFormDTO destinationFormDTO) {
+        this.picture = destinationFormDTO.picture();
+        this.name = destinationFormDTO.name();
+        this.price = destinationFormDTO.price();
+        this.isActive = true;
+    }
 }

@@ -1,10 +1,11 @@
 package br.com.backend.challenge.api.domain.destination;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,6 +16,13 @@ public class DestinationController {
 
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
+    }
+
+    @PostMapping
+    public ResponseEntity<DestinationDTO> PostDestination(@RequestBody @Valid DestinationFormDTO destinationFormDTO, UriComponentsBuilder uriBuilder) {
+        DestinationDTO destinationDTO = destinationService.createDestination(destinationFormDTO);
+        URI uri = uriBuilder.path("destinos/{id}").buildAndExpand(destinationDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(destinationDTO);
     }
 
     @GetMapping
