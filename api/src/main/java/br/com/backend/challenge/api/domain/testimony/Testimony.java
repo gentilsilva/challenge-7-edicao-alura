@@ -35,13 +35,13 @@ public class Testimony {
     }
 
     public void update(@Valid TestimonyUpdateFormDTO testimonyDTO) {
-        if (!testimonyDTO.picture().equals(" ")) {
+        if (!testimonyDTO.picture().isBlank()) {
             this.picture = testimonyDTO.picture();
         }
-        if (!testimonyDTO.testimony().equals(" ")) {
+        if (!testimonyDTO.testimony().isBlank()) {
             this.testimony = testimonyDTO.testimony();
         }
-        if (!testimonyDTO.name().equals(" ")) {
+        if (!testimonyDTO.name().isBlank()) {
             this.name = testimonyDTO.name();
         }
     }

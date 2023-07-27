@@ -34,10 +34,10 @@ public class Destination {
     }
 
     public void update(DestinationUpdateFormDTO destinationUpdateFormDTO) {
-        if (!destinationUpdateFormDTO.picture().equals(" ")) {
+        if (!destinationUpdateFormDTO.picture().isBlank()) {
             this.picture = destinationUpdateFormDTO.picture();
         }
-        if (!destinationUpdateFormDTO.name().equals(" ")) {
+        if (!destinationUpdateFormDTO.name().isEmpty()) {
             this.name = destinationUpdateFormDTO.name();
         }
         if (destinationUpdateFormDTO.price() != null) {

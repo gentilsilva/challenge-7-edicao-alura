@@ -26,7 +26,14 @@ public class DestinationController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DestinationDTO>> getDestinations() {
+    public ResponseEntity<List<DestinationDTO>> getDestinations(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
+        if (!name.isBlank()) {
+            List<DestinationDTO> destinationDTOList = destinationService.readDestinationsByName(name);
+            if (!destinationDTOList.isEmpty()) {
+                return ResponseEntity.ok(destinationDTOList);
+            }
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(destinationService.readAllDestinations());
     }
 

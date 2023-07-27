@@ -31,6 +31,11 @@ public class DestinationService {
         return new DestinationDTO(destinationRepository.getReferenceByIdAndIsActiveTrue(id));
     }
 
+    @Transactional(readOnly = true)
+    public List<DestinationDTO> readDestinationsByName(String name) {
+        return destinationRepository.findAllByIsActiveTrueAndName(name).stream().map(DestinationDTO::new).toList();
+    }
+
     @Transactional
     public DestinationDTO updateDestination(DestinationUpdateFormDTO destinationUpdateFormDTO) {
         Destination destination = destinationRepository.getReferenceByIdAndIsActiveTrue(destinationUpdateFormDTO.id());
@@ -50,4 +55,5 @@ public class DestinationService {
         destination.inactive();
         return true;
     }
+
 }
