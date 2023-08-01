@@ -1,11 +1,12 @@
 package br.com.backend.challenge.api.domain.destination;
 
-import java.math.BigDecimal;
 
 public record DestinationUpdateFormDTO(
         Long id,
-        String picture,
+        String firstPicture,
+        String secondPicture,
         String name,
-        BigDecimal price
+        String meta,
+        String descritiveText
 ) {
 }

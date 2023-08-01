@@ -1,17 +1,18 @@
 package br.com.backend.challenge.api.domain.destination;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-import java.math.BigDecimal;
 
 public record DestinationFormDTO(
-        @NotNull
-        String picture,
-
-        @NotNull
+        @NotBlank
+        String firstPicture,
+        @NotBlank
+        String secondPicture,
+        @NotBlank
         String name,
+        @NotBlank
+        String meta,
+        String descritiveText
 
-        @NotNull
-        BigDecimal price
 ) {
 }

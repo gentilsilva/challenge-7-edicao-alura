@@ -1,16 +1,14 @@
 package br.com.backend.challenge.api.domain.testimony;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public record TestimonyFormDTO(
 
-    @NotNull
+    @NotBlank
     String picture,
-
-    @NotNull
+    @NotBlank
     String testimony,
-    
-    @NotNull
+    @NotBlank
     String name
     
 ) {

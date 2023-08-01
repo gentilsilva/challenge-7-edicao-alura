@@ -1,16 +1,18 @@
 package br.com.backend.challenge.api.domain.destination;
 
-import java.math.BigDecimal;
 
 public record DestinationDTO(
         Long id,
-        String picture,
+        String firstPicture,
+        String secondPicture,
         String name,
-        BigDecimal price
+        String meta,
+        String descritiveText
 ) {
 
     public DestinationDTO(Destination destination) {
-        this(destination.getId(), destination.getPicture(), destination.getName(), destination.getPrice());
+        this(destination.getId(), destination.getFirstPicture(), destination.getSecondPicture(),
+                destination.getName(), destination.getMeta(), destination.getDescritiveText());
     }
 
 }

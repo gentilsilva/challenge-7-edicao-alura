@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 
 @Entity(name = "Destination")
 @Table(name = "tb_destination")
@@ -18,31 +17,49 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 2048)
-    private String picture;
+    @Column(name = "first_picture", length = 2048)
+    private String firstPicture;
+
+    @Column(name = "second_picture", length = 2048)
+    private String secondPicture;
+
     private String name;
-    private BigDecimal price;
+
+    @Column(length = 160)
+    private String meta;
+
+    @Column(name = "descritive_text", columnDefinition = "TEXT")
+    private String descritiveText;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
     public Destination(DestinationFormDTO destinationFormDTO) {
-        this.picture = destinationFormDTO.picture();
+        this.firstPicture = destinationFormDTO.firstPicture();
+        this.secondPicture = destinationFormDTO.secondPicture();
         this.name = destinationFormDTO.name();
-        this.price = destinationFormDTO.price();
+        this.meta = destinationFormDTO.meta();
+        this.descritiveText = destinationFormDTO.descritiveText();
         this.isActive = true;
     }
 
     public void update(DestinationUpdateFormDTO destinationUpdateFormDTO) {
-        if (!destinationUpdateFormDTO.picture().isBlank()) {
-            this.picture = destinationUpdateFormDTO.picture();
+        if (!destinationUpdateFormDTO.firstPicture().isBlank()) {
+            this.firstPicture = destinationUpdateFormDTO.firstPicture();
         }
-        if (!destinationUpdateFormDTO.name().isEmpty()) {
+        if (!destinationUpdateFormDTO.secondPicture().isBlank()) {
+            this.secondPicture = destinationUpdateFormDTO.secondPicture();
+        }
+        if (!destinationUpdateFormDTO.name().isBlank()) {
             this.name = destinationUpdateFormDTO.name();
         }
-        if (destinationUpdateFormDTO.price() != null) {
-            this.price = destinationUpdateFormDTO.price();
+        if (!destinationUpdateFormDTO.meta().isBlank()) {
+            this.meta = destinationUpdateFormDTO.meta();
         }
+        if (!destinationUpdateFormDTO.descritiveText().isBlank()) {
+            this.descritiveText = destinationUpdateFormDTO.descritiveText();
+        }
+
     }
 
     public void inactive() {
